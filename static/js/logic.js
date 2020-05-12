@@ -19,3 +19,22 @@ var myMap = L.map("map", {
       accessToken: API_KEY
     });
 }
+
+var url ="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+function markerSize(magnitude) {
+    return magnitude * 5;
+}
+
+// function to return the color based on magnitude
+function markerColor(magnitude) {
+  if (magnitude > 4) {
+    return 'red'
+  } else if (magnitude > 3) {
+    return 'orange'
+  } else if (magnitude > 2) {
+    return 'yellow'
+  } else {
+    return 'green'
+  }
+}
