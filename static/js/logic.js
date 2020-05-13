@@ -14,9 +14,9 @@ function markerSize(magnitude) {
 
 function markerColor(magnitude) {
   if (magnitude > 4) {
-    return 'white'
+    return 'red'
   } else if (magnitude > 3) {
-    return 'orange'
+    return 'blue'
   } else if (magnitude > 2) {
     return 'purple'
   } else 
@@ -75,7 +75,14 @@ function markerOpacity(magnitude) {
   // function to receive a layer of markers and plot them on a map.
   function createMap(earthquakes) {
     
-      var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.streets",
+    accessToken: API_KEY
+        });
+
+    var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
         maxZoom: 18,
         id: "mapbox.dark",
         accessToken: API_KEY
@@ -83,6 +90,7 @@ function markerOpacity(magnitude) {
     
       // Define a baseMaps object to hold our base layers
       var baseMaps = {
+        "Street Map": streetmap,
         "Dark Map": darkmap
       };
     
@@ -99,7 +107,7 @@ function markerOpacity(magnitude) {
       
           var div = L.DomUtil.create('div', 'info legend')
           
-          div.innerHTML = "<h3>Magnitude Legend</h3><table><tr><th>>= 4</th><td>White</td></tr><tr><th>>= 3</th><td>Orange</td></tr><tr><th>>= 2</th><td>Purple</td></tr><tr><th>< 2</th><td>Pink</td></tr></table>";
+          div.innerHTML = "<h3>Magnitude Legend</h3><table><tr><th>>= 4</th><td>Red</td></tr><tr><th>>= 3</th><td>Blue</td></tr><tr><th>>= 2</th><td>Purple</td></tr><tr><th>< 2</th><td>Pink</td></tr></table>";
   
           return div;
       };
